@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Tabs = styled.div`
   display: flex;
   width: 100%;
-  background: #ECEEF1;
+  background: #eceef1;
 `;
 
 const TabSelectorButton = styled.button`
@@ -28,6 +28,19 @@ const TabUnderLine = styled(motion.div)`
   border-radius: 2px;
   background: #3181ff;
 `;
+
+const TabItem = (props: {
+  title: string;
+  onClick: () => void;
+  isSelected: boolean;
+}) => {
+  return (
+    <TabSelectorButton onClick={props.onClick}>
+      {props.title}
+      {props.isSelected && <TabUnderLine layoutId="underline" />}
+    </TabSelectorButton>
+  );
+};
 export default function TabsComponent(props: {
   setSelectedTab: (tab: string) => void;
   selectedTab: string;
@@ -36,20 +49,21 @@ export default function TabsComponent(props: {
   return (
     <Tabs>
       <AnimateSharedLayout>
-        <TabSelectorButton onClick={() => setSelectedTab("buttons")}>
-          Buttons
-          {selectedTab === "buttons" && <TabUnderLine layoutId="underline" />}
-        </TabSelectorButton>
-        <TabSelectorButton onClick={() => setSelectedTab("modals")}>
-          Modals
-          {selectedTab === "modals" && <TabUnderLine layoutId="underline" />}
-        </TabSelectorButton>
-        <TabSelectorButton onClick={() => setSelectedTab("transitions")}>
-          Transitions
-          {selectedTab === "transitions" && (
-            <TabUnderLine layoutId="underline" />
-          )}
-        </TabSelectorButton>
+        <TabItem
+          title="Buttons"
+          onClick={() => setSelectedTab("buttons")}
+          isSelected={selectedTab === "buttons"}
+        />
+        <TabItem
+          title="Modals"
+          onClick={() => setSelectedTab("modals")}
+          isSelected={selectedTab === "modals"}
+        />
+        <TabItem
+          title="Transitions"
+          onClick={() => setSelectedTab("transitions")}
+          isSelected={selectedTab === "transitions"}
+        />
       </AnimateSharedLayout>
     </Tabs>
   );

@@ -38,7 +38,6 @@ export default function ModalsTab() {
             initial={{ background: "rgba(0,0,0,0)" }}
             animate={{ background: "rgba(0,0,0,0.8)" }}
             exit={{ background: "rgba(0,0,0,0)" }}
-            transition={{ duration: 0.3 }}
           >
             <Modal
               initial={{ scale: 0.7 }}
