@@ -77,8 +77,9 @@ const initialGrid = {
 export default function TransitionsTab() {
   const [gridItems, setGridItems] =
     useState<{ [id: number]: GridItem | undefined }>(initialGrid);
+  const [editedSlide, setEditedSlide] = useState<number | undefined>(undefined);
+
   const gridValues = Object.values(gridItems);
-  const [editedIndex, setEditedIndex] = useState<number | undefined>(undefined);
 
   const isAlreadySelected = (id: string) =>
     gridValues.find((entry) => entry?.imageId === id);
@@ -87,12 +88,12 @@ export default function TransitionsTab() {
     <AnimateSharedLayout type="crossfade">
       <ImagePlaceholderGrid>
         {gridValues.map((item, index) => (
-          <ImagePlaceholder key={index} onClick={() => setEditedIndex(index)}>
+          <ImagePlaceholder key={index} onClick={() => setEditedSlide(index)}>
             {item && <ImageGridItem src={item.src} layoutId={item.imageId} />}
           </ImagePlaceholder>
         ))}
       </ImagePlaceholderGrid>
-      {editedIndex !== undefined && (
+      {editedSlide !== undefined && (
         <Drawer
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -106,8 +107,8 @@ export default function TransitionsTab() {
                 src={placeholder.src}
                 layoutId={placeholder.imageId}
                 onClick={() => {
-                  setGridItems({ ...gridItems, [editedIndex]: placeholder });
-                  setEditedIndex(undefined);
+                  setGridItems({ ...gridItems, [editedSlide]: placeholder });
+                  setEditedSlide(undefined);
                 }}
               />
             )

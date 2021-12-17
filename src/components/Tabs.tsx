@@ -41,6 +41,7 @@ const TabItem = (props: {
     </TabSelectorButton>
   );
 };
+
 export default function TabsComponent(props: {
   setSelectedTab: (tab: string) => void;
   selectedTab: string;
